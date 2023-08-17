@@ -1,11 +1,11 @@
 const loader = document.querySelector('#loader');
 const dataContainer = document.querySelector('#data-container');
 
-function toggleLoader() {
+const toggleLoader = () => {
     loader.hidden = !loader.hidden;
-}
+};
 
-function CreateIncomingListOfUsers(users) {
+const CreateIncomingListOfUsers = (users) => {
     for (const user of users) {
         const listItem = document.createElement('li');
         const itemLink = document.createElement('a');
@@ -16,11 +16,12 @@ function CreateIncomingListOfUsers(users) {
         dataContainer.append(listItem);
         listItem.append(itemLink);
     }
-}
+};
 
 toggleLoader();
 
-fetch('https://jsonplaceholder.typicode.com/users')
+const renderAllUsers = () => {
+    fetch('https://jsonplaceholder.typicode.com/users')
     .then((response) => {
         if (!response.ok) {
             throw new Error("Ошибка запроса");
@@ -36,3 +37,6 @@ fetch('https://jsonplaceholder.typicode.com/users')
     .finally(() => {
         toggleLoader();
     });
+};
+
+renderAllUsers();
